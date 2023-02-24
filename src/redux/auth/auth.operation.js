@@ -31,3 +31,12 @@ export const login = createAsyncThunk('auth/login', async credentials => {
     console.log(error);
   }
 });
+
+export const logout = createAsyncThunk('auth/logout', async () => {
+  try {
+    await axios.post('/users/logout');
+    token.unset();
+  } catch (error) {
+    console.log(error);
+  }
+});

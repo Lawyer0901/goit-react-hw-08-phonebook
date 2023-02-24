@@ -1,12 +1,9 @@
 import { StyledLink } from './Navigation.styled';
 
-export const Navigation = () => {
+export const AuthNavigation = () => {
   return (
     <nav>
       <ul>
-        <li>
-          <StyledLink to="/">Home</StyledLink>
-        </li>
         <li>
           <StyledLink to="register">Register</StyledLink>
         </li>
