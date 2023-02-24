@@ -1,10 +1,10 @@
-import usersSlice from './users/users.slice';
 import { configureStore } from '@reduxjs/toolkit';
+import { authReducer } from './auth/auth.slice';
 
 export const store = configureStore({
   reducer: {
-    users: usersSlice,
+    auth: authReducer,
+    // contact: contactReducer,
+    // filter: filterReducer
   },
 });
-
-console.log(usersSlice);

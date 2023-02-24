@@ -8,7 +8,10 @@ export const Navigation = () => {
           <StyledLink to="/">Home</StyledLink>
         </li>
         <li>
-          <StyledLink to="users">Users</StyledLink>
+          <StyledLink to="register">Register</StyledLink>
+        </li>
+        <li>
+          <StyledLink to="login">Login</StyledLink>
         </li>
       </ul>
     </nav>
