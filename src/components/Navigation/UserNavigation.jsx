@@ -11,6 +11,10 @@ export const UserNavigation = () => {
     navigate('/register');
   };
   const user = useSelector(getUser);
+
+  if (user === null) {
+    return;
+  }
   return (
     <div>
       <p>Wellcome, {user}</p>
