@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { login, logout, refresh, register } from './auth.operation';
+// import { addContact, fetchContacts } from 'redux/contact/contact.operation';
 
 const initialState = {
   user: {
@@ -26,6 +27,12 @@ const authSlice = createSlice({
         state.token = payload.token;
         state.isLogedIn = true;
       })
+      // .addCase(fetchContacts.fulfilled, (state, { payload }) => {
+      //   state.token = payload.token;
+      // })
+      // .addCase(addContact.fulfilled, (state, { payload }) => {
+      //   state.token = payload.token;
+      // })
       .addCase(logout.fulfilled, state => {
         state.user = {
           name: '',
@@ -38,7 +45,7 @@ const authSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(refresh.fulfilled, (state, { payload }) => {
-        console.log(payload);
+        // console.log(payload);
         state.user = payload;
         state.isLogedIn = true;
         state.isRefreshing = false;
