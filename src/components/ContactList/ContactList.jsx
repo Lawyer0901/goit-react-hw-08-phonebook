@@ -13,7 +13,7 @@ export function ContactList() {
   const filter = useSelector(getFilter);
   const dispatch = useDispatch();
   const filteredContacts = contacts.filter(({ name }) =>
-    name.toLowerCase().includes(filter.toLowerCase())
+    name.toLowerCase().includes(filter)
   );
   // const isLoading = useSelector(getIsLoading);
   useEffect(() => {
@@ -21,33 +21,27 @@ export function ContactList() {
   }, [dispatch]);
 
   return (
-    <>
-      {contacts.length > 0 ? (
-        <Wraper>
-          <Table>
-            <thead>
-              <tr>
-                <Tabledata>Contact Name</Tabledata>
-                <Tabledata>Contact number</Tabledata>
-                <Tabledata>Delete Contact</Tabledata>
-              </tr>
-            </thead>
-            {/* {isLoading && <Loader />} */}
-            {filteredContacts.map(el => {
-              return (
-                <ContactListItem
-                  key={el.id}
-                  name={el.name}
-                  phone={el.number}
-                  onClick={() => dispatch(deleteContact(el.id))}
-                />
-              );
-            })}
-          </Table>
-        </Wraper>
-      ) : (
-        <p>There is no Contacts</p>
-      )}
-    </>
+    <Wraper>
+      <Table>
+        <thead>
+          <tr>
+            <Tabledata>Contact Name</Tabledata>
+            <Tabledata>Contact number</Tabledata>
+            <Tabledata>Delete Contact</Tabledata>
+          </tr>
+        </thead>
+        {/* {isLoading && <Loader />} */}
+        {filteredContacts.map(el => {
+          return (
+            <ContactListItem
+              key={el.id}
+              name={el.name}
+              phone={el.number}
+              onClick={() => dispatch(deleteContact(el.id))}
+            />
+          );
+        })}
+      </Table>
+    </Wraper>
   );
 }

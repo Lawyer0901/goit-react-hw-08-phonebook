@@ -1,12 +1,11 @@
 import { Loader } from 'components/Loader/Loader';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+
 import { register } from 'redux/auth/auth.operation';
 import { Link } from 'react-router-dom';
 
 export const RegisterForm = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const initialState = {
     name: '',
@@ -26,7 +25,6 @@ export const RegisterForm = () => {
     dispatch(register(values));
     setIsLoading(false);
     setValues(initialState);
-    navigate('/login');
   };
 
   return (

@@ -1,11 +1,10 @@
 import { Loader } from 'components/Loader/Loader';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+
 import { login } from 'redux/auth/auth.operation';
 
 export const LoginForm = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const initialState = {
     email: '',
@@ -23,8 +22,7 @@ export const LoginForm = () => {
     setIsLoading(true);
     dispatch(login(values));
     setIsLoading(false);
-    setValues(initialState);
-    navigate('/contacts');
+    // setValues(initialState);
   };
 
   return (
@@ -50,7 +48,7 @@ export const LoginForm = () => {
             onChange={handleChangeInput}
           />
         </label>
-        <button onSubmit={handleSubmit}>Register New User</button>
+        <button onSubmit={handleSubmit}>Login</button>
       </form>
     </>
   );
