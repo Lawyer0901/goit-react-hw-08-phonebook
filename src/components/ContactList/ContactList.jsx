@@ -20,7 +20,7 @@ export function ContactList() {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  return (
+  return contacts.length ? (
     <Wraper>
       <Table>
         <thead>
@@ -43,5 +43,7 @@ export function ContactList() {
         })}
       </Table>
     </Wraper>
+  ) : (
+    <p>There is no contact</p>
   );
 }

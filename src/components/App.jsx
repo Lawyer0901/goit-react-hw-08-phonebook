@@ -10,6 +10,7 @@ import { PrivateRoute } from './PrivateRoute';
 const Login = lazy(() => import('pages/Login'));
 const Contacts = lazy(() => import('pages/Contacts'));
 const Register = lazy(() => import('pages/Register'));
+const Home = lazy(() => import('pages/Home'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ export const App = () => {
       ) : (
         <Routes>
           <Route path="/" element={<LayOut />}>
+            <Route index path="/home" element={<Home />} />
             <Route
               path="/register"
               element={
