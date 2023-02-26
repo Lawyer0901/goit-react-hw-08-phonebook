@@ -11,7 +11,7 @@ export const UserNavigation = () => {
     navigate('/register');
   };
   const user = useSelector(getUser);
-
+  console.log(user);
   if (user === null) {
     return;
   }
