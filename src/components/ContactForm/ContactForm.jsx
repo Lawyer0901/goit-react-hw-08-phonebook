@@ -5,12 +5,13 @@ import { Form, Label, Input, AddButton } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addContact } from 'redux/contact/contact.operation';
+import { getItems } from 'redux/contact/contact.selectors';
 export const ContactForm = () => {
   const [userName, setUserName] = useState('');
   const [userNumber, setUserNumber] = useState('');
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.items);
-  console.log(contacts);
+  const contacts = useSelector(getItems);
+  // console.log(contacts);
   const handleChangeName = e => {
     const { name, value } = e.target;
     if (name === 'userName') {
@@ -34,6 +35,7 @@ export const ContactForm = () => {
       dispatch(addContact(newUser));
       setUserName('');
       setUserNumber('');
+      console.log(newUser);
     }
   };
 

@@ -1,4 +1,4 @@
-import { getToken } from '@chakra-ui/react';
+import { getToken } from '../auth/auth.selectors';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -13,16 +13,32 @@ const token = {
   },
 };
 
+// Добавляем контакт на БэкЕнд
+
+export const addContact = createAsyncThunk(
+  'contacts/addContact',
+  async (newContact, { rejectWithValue, getState }) => {
+    try {
+      console.log(getState());
+      const state = getToken(getState());
+      const { data } = await axios.post('/contacts', newContact);
+      token.set(state);
+      console.log(data);
+      return data;
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  }
+);
+
+// Получаем все контакты с БэкЕнда
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, { getState, rejectWithValue }) => {
     try {
       const state = getToken(getState());
-      //   console.log(state);
-
       const { data } = await axios.get('/contacts');
-      //   console.log(data);
-      token.set(state.data.token);
+      token.set(state);
       return data;
     } catch (error) {
       rejectWithValue(error.message);
@@ -37,23 +53,7 @@ export const deleteContact = createAsyncThunk(
       const state = getToken(getState());
       const { data } = await axios.delete(`/contacts/${contactId}`);
 
-      token.set(state.data.token);
-      return data;
-    } catch (e) {
-      return rejectWithValue(e.message);
-    }
-  }
-);
-
-export const addContact = createAsyncThunk(
-  'contacts/addContact',
-  async (newContact, { rejectWithValue, getState }) => {
-    try {
-      const state = getToken(getState());
-
-      const { data } = await axios.post('/contacts', newContact);
-
-      token.set(state.data);
+      token.set(state);
       return data;
     } catch (e) {
       return rejectWithValue(e.message);
