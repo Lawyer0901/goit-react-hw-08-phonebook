@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addContact, deleteContact, fetchContacts } from './contact.operation';
-
+import { addContact, deleteContact } from './contact.operation';
+// deleteContact, fetchContacts
 export const contactSlice = createSlice({
   name: 'contacts',
   initialState: {
@@ -9,64 +9,77 @@ export const contactSlice = createSlice({
     error: null,
   },
 
-  extraReducers:
-    // builder => {
-    //   builder
-    //     .addCase(addContact.pending, state => (state.isLoading = true))
-    //     .addCase(addContact.fulfilled, (state, action) => {
-    //       state.isLoading = false;
-    //       state.error = null;
-    //       state.items = [...state.items, action.payload];
-    //     })
-    //     .addCase(addContact.rejected, (state, action) => {
-    //       state.isLoading = false;
-    //       state.error = action.payload;
-    //     });
-    // },
-
-    {
-      [fetchContacts.pending]: state => {
+  extraReducers: builder => {
+    builder
+      .addCase(addContact.pending, state => {
         state.isLoading = true;
-      },
-      [fetchContacts.fulfilled]: (state, { payload }) => {
-        state.items = payload;
-        state.isLoading = false;
-        // console.log(payload);
-      },
-      [fetchContacts.rejected]: state => {
-        state.isLoading = false;
-        state.error = 'error';
-        console.log(state.error);
-      },
-      [addContact.pending]: state => {
-        state.isLoading = true;
-      },
-      [addContact.fulfilled]: (state, action) => {
+      })
+      .addCase(addContact.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        // state.items.push(action.payload);
         state.items = [...state.items, action.payload];
-      },
-
-      [addContact.rejected]: (state, action) => {
+      })
+      .addCase(addContact.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-      },
-
-      [deleteContact.pending]: state => {
+      })
+      .addCase(deleteContact.pending, state => {
         state.isLoading = true;
-      },
-      [deleteContact.fulfilled]: (state, action) => {
+      })
+      .addCase(deleteContact.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-
         state.items = state.items.filter(item => item.id !== action.payload.id);
-      },
-      [deleteContact.rejected]: (state, action) => {
+      })
+      .addCase(deleteContact.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-      },
-    },
+      });
+  },
+
+  // {
+  //   [fetchContacts.pending]: state => {
+  //     state.isLoading = true;
+  //   },
+  //   [fetchContacts.fulfilled]: (state, { payload }) => {
+  //     state.items = [...state.items, payload];
+  //     state.isLoading = false;
+  //     // console.log(payload);
+  //   },
+  //   [fetchContacts.rejected]: state => {
+  //     state.isLoading = false;
+  //     state.error = 'error';
+  //     console.log(state.error);
+  //   },
+  //   [addContact.pending]: state => {
+  //     state.isLoading = true;
+  //   },
+  //   [addContact.fulfilled]: (state, action) => {
+  //     state.isLoading = false;
+  //     state.error = null;
+  //     // state.items.push(action.payload);
+  //     state.items = [...state.items, action.payload];
+  //   },
+
+  //   [addContact.rejected]: (state, action) => {
+  //     state.isLoading = false;
+  //     state.error = action.payload;
+  //   },
+
+  //   [deleteContact.pending]: state => {
+  //     state.isLoading = true;
+  //   },
+  //   [deleteContact.fulfilled]: (state, action) => {
+  //     state.isLoading = false;
+  //     state.error = null;
+
+  //     state.items = state.items.filter(item => item.id !== action.payload.id);
+  //   },
+  //   [deleteContact.rejected]: (state, action) => {
+  //     state.isLoading = false;
+  //     state.error = action.payload;
+  //   },
+  // },
 });
 
 export default contactSlice.reducer;

@@ -21,7 +21,7 @@ export function ContactList() {
 
   return (
     <>
-      {contacts.length > 0 ? (
+      {contacts ? (
         <Wraper>
           <Table>
             <thead>

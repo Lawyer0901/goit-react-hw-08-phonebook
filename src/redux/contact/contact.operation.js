@@ -13,6 +13,21 @@ const token = {
   },
 };
 
+// Получаем все контакты с БэкЕнда
+export const fetchContacts = createAsyncThunk(
+  'contacts/fetchAll',
+  async (_, { getState, rejectWithValue }) => {
+    try {
+      const state = getToken(getState());
+      const { data } = await axios.get('/contacts');
+      token.set(state);
+      return data;
+    } catch (error) {
+      rejectWithValue(error.message);
+    }
+  }
+);
+
 // Добавляем контакт на БэкЕнд
 
 export const addContact = createAsyncThunk(
@@ -31,21 +46,7 @@ export const addContact = createAsyncThunk(
   }
 );
 
-// Получаем все контакты с БэкЕнда
-export const fetchContacts = createAsyncThunk(
-  'contacts/fetchAll',
-  async (_, { getState, rejectWithValue }) => {
-    try {
-      const state = getToken(getState());
-      const { data } = await axios.get('/contacts');
-      token.set(state);
-      return data;
-    } catch (error) {
-      rejectWithValue(error.message);
-    }
-  }
-);
-
+// Удаляем контакт
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async (contactId, { getState, rejectWithValue }) => {
