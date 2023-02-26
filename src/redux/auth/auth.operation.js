@@ -12,46 +12,51 @@ const token = {
   },
 };
 
-export const register = createAsyncThunk('auth/register', async credentials => {
-  try {
-    const { data } = await axios.post('/users/signup', credentials);
-    token.set(data.token);
-    return data;
-  } catch (error) {
-    console.log(error);
+export const register = createAsyncThunk(
+  'auth/register',
+  async (credentials, thunkAPI) => {
+    try {
+      const { data } = await axios.post('/users/signup', credentials);
+      token.set(data.token);
+      return data;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error.massage);
+    }
   }
-});
+);
 
-export const login = createAsyncThunk('auth/login', async credentials => {
-  try {
-    const { data } = await axios.post('/users/login', credentials);
-    token.set(data.token);
-    return data;
-  } catch (error) {
-    console.log(error);
+export const login = createAsyncThunk(
+  'auth/login',
+  async (credentials, thunkAPI) => {
+    try {
+      const { data } = await axios.post('/users/login', credentials);
+      token.set(data.token);
+      return data;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error.massage);
+    }
   }
-});
+);
 
-export const logout = createAsyncThunk('auth/logout', async () => {
+export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await axios.post('/users/logout');
     token.unset();
   } catch (error) {
-    console.log(error);
+    thunkAPI.rejectWithValue(error.massage);
   }
 });
 
 export const refresh = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
-  const state = thunkAPI.getState();
-  const persistedToken = state.auth.token;
-  if (persistedToken === null) {
-    return thunkAPI.rejectWithValue('Unable to fetch user');
+  const { token } = thunkAPI.getState().auth;
+  if (!token) {
+    return thunkAPI.rejectWithValue('No valid token');
   }
   try {
-    token.set(persistedToken);
+    token.set(token);
     const { data } = await axios.get('/users/current');
     return data;
   } catch (error) {
-    console.log(error);
+    thunkAPI.rejectWithValue(error.massage);
   }
 });

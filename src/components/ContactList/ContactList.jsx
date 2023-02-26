@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { deleteContact, fetchContacts } from 'redux/contact/contact.operation';
 import { getFilter } from 'redux/filter/filter.selector';
 import { getItems } from 'redux/contact/contact.selectors';
+// import { Loader } from 'components/Loader/Loader';
 
 export function ContactList() {
   const contacts = useSelector(getItems);
@@ -14,14 +15,14 @@ export function ContactList() {
   const filteredContacts = contacts.filter(({ name }) =>
     name.toLowerCase().includes(filter.toLowerCase())
   );
-
+  // const isLoading = useSelector(getIsLoading);
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
   return (
     <>
-      {contacts ? (
+      {contacts.length > 0 ? (
         <Wraper>
           <Table>
             <thead>
@@ -31,6 +32,7 @@ export function ContactList() {
                 <Tabledata>Delete Contact</Tabledata>
               </tr>
             </thead>
+            {/* {isLoading && <Loader />} */}
             {filteredContacts.map(el => {
               return (
                 <ContactListItem

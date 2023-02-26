@@ -19,7 +19,7 @@ export const RegisterForm = () => {
     const { value, name } = event.target;
     setValues(prev => ({ ...prev, [name]: value }));
   };
-  //   console.log(values);
+  console.log(values);
   const handleSubmit = event => {
     event.preventDefault();
     setIsLoading(true);
@@ -35,7 +35,6 @@ export const RegisterForm = () => {
       <h2>Register Page</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="">
-          {' '}
           Name
           <input
             type="text"

@@ -1,14 +1,15 @@
 import { Route, Routes } from 'react-router-dom';
 import { LayOut } from './LayOut/LayOut';
-import { useEffect } from 'react';
-import Login from 'pages/Login';
-import Contacts from 'pages/Contacts';
-import Register from 'pages/Register';
+import { useEffect, lazy } from 'react';
 import { refresh } from 'redux/auth/auth.operation';
 import { useDispatch, useSelector } from 'react-redux';
-import PrivateRoute from './PrivateRoute/PrivateRoute';
-import PublicRoute from './PublicRoute/PublicRoute';
 import { getIsRefreshing } from 'redux/auth/auth.selectors';
+import { RestrictedRoute } from './RestrictedRoute';
+import { PrivateRoute } from './PrivateRoute';
+
+const Login = lazy(() => import('pages/Login'));
+const Contacts = lazy(() => import('pages/Contacts'));
+const Register = lazy(() => import('pages/Register'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -23,15 +24,24 @@ export const App = () => {
       ) : (
         <Routes>
           <Route path="/" element={<LayOut />}>
-            <Route path="" element={<PublicRoute />}>
-              {/* <Route path="" element={<p>Start</p>} /> */}
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-            </Route>
-
-            <Route path="" element={<PrivateRoute />}>
-              <Route path="/contacts" element={<Contacts />} />
-            </Route>
+            <Route
+              path="/register"
+              element={
+                <RestrictedRoute component={Register} redirectTo="/contacts" />
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <RestrictedRoute component={Login} redirectTo="/contacts" />
+              }
+            />
+            <Route
+              path="/contacts"
+              element={
+                <PrivateRoute component={Contacts} redirectTo="/login" />
+              }
+            />
           </Route>
         </Routes>
       )}

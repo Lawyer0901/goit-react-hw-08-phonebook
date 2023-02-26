@@ -4,6 +4,7 @@ import { UserNavigation } from 'components/Navigation/UserNavigation';
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { getIsLogedIn } from 'redux/auth/auth.selectors';
+import { Suspense } from 'react';
 
 export const LayOut = () => {
   const isLogedIn = useSelector(getIsLogedIn);
@@ -11,7 +12,9 @@ export const LayOut = () => {
     <>
       <header>{isLogedIn ? <UserNavigation /> : <AuthNavigation />}</header>
       <main>
-        <Outlet />
+        <Suspense fallback={null}>
+          <Outlet />
+        </Suspense>
       </main>
     </>
   );

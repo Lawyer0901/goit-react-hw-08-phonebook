@@ -1,26 +1,26 @@
-import { getToken } from '../auth/auth.selectors';
+// import { getToken } from '../auth/auth.selectors';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 
-const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-  unset() {
-    axios.defaults.headers.common.Authorization = '';
-  },
-};
+// const token = {
+//   set(token) {
+//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+//   },
+//   unset() {
+//     axios.defaults.headers.common.Authorization = '';
+//   },
+// };
 
 // Получаем все контакты с БэкЕнда
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
-  async (_, { getState, rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const state = getToken(getState());
+      // const state = getToken(getState());
       const { data } = await axios.get('/contacts');
-      token.set(state);
+      // token.set(state);
       return data;
     } catch (error) {
       rejectWithValue(error.message);
@@ -32,12 +32,12 @@ export const fetchContacts = createAsyncThunk(
 
 export const addContact = createAsyncThunk(
   'contacts/addContact',
-  async (newContact, { rejectWithValue, getState }) => {
+  async (newContact, { rejectWithValue }) => {
     try {
-      console.log(getState());
-      const state = getToken(getState());
+      // console.log(getState());
+      // const state = getToken(getState());
       const { data } = await axios.post('/contacts', newContact);
-      token.set(state);
+      // token.set(state);
       console.log(data);
       return data;
     } catch (e) {
@@ -49,12 +49,12 @@ export const addContact = createAsyncThunk(
 // Удаляем контакт
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
-  async (contactId, { getState, rejectWithValue }) => {
+  async (contactId, { rejectWithValue }) => {
     try {
-      const state = getToken(getState());
+      // const state = getToken(getState());
       const { data } = await axios.delete(`/contacts/${contactId}`);
 
-      token.set(state);
+      // token.set(state);
       return data;
     } catch (e) {
       return rejectWithValue(e.message);
