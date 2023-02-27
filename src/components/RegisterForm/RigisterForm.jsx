@@ -3,7 +3,15 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { register } from 'redux/auth/auth.operation';
-import { Link } from 'react-router-dom';
+import { Container, Link } from 'components/Navigation/UserNavigation.styled';
+import {
+  Form,
+  Label,
+  Input,
+  AddButton,
+} from 'components/ContactForm/ContactForm.styled';
+import Box from '@mui/material/Box';
+import { Title } from 'components/ContactForm/ContactForm.styled';
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -30,38 +38,53 @@ export const RegisterForm = () => {
   return (
     <>
       {isLoading && <Loader />}
-      <h2>Register Page</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="">
-          Name
-          <input
-            type="text"
-            name="name"
-            value={values.name}
-            onChange={handleChangeInput}
-          />
-        </label>
-        <label htmlFor="">
-          Email
-          <input
-            type="email"
-            name="email"
-            value={values.email}
-            onChange={handleChangeInput}
-          />
-        </label>
-        <label htmlFor="">
-          Password
-          <input
-            type="password"
-            name="password"
-            value={values.password}
-            onChange={handleChangeInput}
-          />
-        </label>
-        <button onSubmit={handleSubmit}>Register New User</button>
-      </form>
-      <Link to="/login">Already have registration?</Link>
+      <Container>
+        <Box
+          component="div"
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            width: 300,
+            height: 300,
+            backgroundColor: 'violet',
+          }}
+        >
+          <Title>Register Page</Title>
+          <Form onSubmit={handleSubmit}>
+            <Label htmlFor="">
+              Name
+              <Input
+                type="text"
+                name="name"
+                value={values.name}
+                onChange={handleChangeInput}
+              />
+            </Label>
+            <Label htmlFor="">
+              Email
+              <Input
+                type="email"
+                name="email"
+                value={values.email}
+                onChange={handleChangeInput}
+              />
+            </Label>
+            <Label htmlFor="">
+              Password
+              <Input
+                type="password"
+                name="password"
+                value={values.password}
+                onChange={handleChangeInput}
+              />
+            </Label>
+            <AddButton onSubmit={handleSubmit}>Register New User</AddButton>
+          </Form>
+          <Link to="/login">Already have registration?</Link>
+        </Box>
+      </Container>
     </>
   );
 };

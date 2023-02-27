@@ -3,6 +3,21 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { login } from 'redux/auth/auth.operation';
+import { Container } from 'components/Navigation/UserNavigation.styled';
+import {
+  Form,
+  Label,
+  Input,
+  AddButton,
+} from 'components/ContactForm/ContactForm.styled';
+import { Title } from 'components/ContactForm/ContactForm.styled';
+
+// import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+// import { color } from 'framer-motion';
+// import TextField from '@mui/material/TextField';
+// import Button from '@mui/material/Button';
+// import Typography from '@mui/material/Typography';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -28,28 +43,43 @@ export const LoginForm = () => {
   return (
     <>
       {isLoading && <Loader />}
-      <h2>Login Page</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="">
-          Email
-          <input
-            type="email"
-            name="email"
-            value={values.email}
-            onChange={handleChangeInput}
-          />
-        </label>
-        <label htmlFor="">
-          Password
-          <input
-            type="password"
-            name="password"
-            value={values.password}
-            onChange={handleChangeInput}
-          />
-        </label>
-        <button onSubmit={handleSubmit}>Login</button>
-      </form>
+      <Container>
+        <Box
+          component="div"
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            width: 300,
+            height: 300,
+            backgroundColor: 'violet',
+          }}
+        >
+          <Title>Phonebook</Title>
+          <Form onSubmit={handleSubmit}>
+            <Label htmlFor="">
+              Email
+              <Input
+                type="email"
+                name="email"
+                value={values.email}
+                onChange={handleChangeInput}
+              />
+            </Label>
+            <Label htmlFor="">
+              Password
+              <Input
+                type="password"
+                name="password"
+                value={values.password}
+                onChange={handleChangeInput}
+              />
+            </Label>
+            <AddButton onSubmit={handleSubmit}>Login</AddButton>
+          </Form>
+        </Box>
+      </Container>
     </>
   );
 };

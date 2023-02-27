@@ -1,16 +1,17 @@
-import { StyledLink } from './Navigation.styled';
+// import { StyledLink } from './Navigation.styled';
+import { NavList, NavItem, Link } from './UserNavigation.styled';
 
 export const AuthNavigation = () => {
   return (
     <nav>
-      <ul>
-        <li>
-          <StyledLink to="register">Register</StyledLink>
-        </li>
-        <li>
-          <StyledLink to="login">Login</StyledLink>
-        </li>
-      </ul>
+      <NavList>
+        <NavItem>
+          <Link to="register">Register</Link>
+        </NavItem>
+        <NavItem>
+          <Link to="login">Login</Link>
+        </NavItem>
+      </NavList>
     </nav>
   );
 };

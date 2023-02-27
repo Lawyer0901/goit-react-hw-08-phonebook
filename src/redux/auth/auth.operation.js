@@ -48,12 +48,12 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 });
 
 export const refresh = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
-  const { tokenState } = thunkAPI.getState().auth;
-  if (!tokenState) {
+  const savedToken = thunkAPI.getState().auth.token;
+  if (!savedToken) {
     return thunkAPI.rejectWithValue('No valid token');
   }
   try {
-    token.set(tokenState);
+    token.set(savedToken);
     const { data } = await axios.get('/users/current');
     return data;
   } catch (error) {

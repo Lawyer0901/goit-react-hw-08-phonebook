@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
 export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50vw;
   button {
     width: 190px;
     margin: 0 auto;
@@ -21,8 +26,22 @@ export const Input = styled.input`
   outline: none;
   transition: transform 250ms linear, border-color 250ms linear,
     color 250ms linear;
+  + button {
+    width: 190px;
+    margin: 0 auto ${p => p.theme.space[3]}px;
+  }
+  :focus,
+  :hover,
+  :focus-visible {
+    color: ${p => p.theme.colors.text};
+    border-color: ${p => p.theme.colors.primary};
+    transform: scale(1.1);
+  }
 `;
-
+export const Title = styled.h1`
+  color: #1976d2;
+  border-color: ${p => p.theme.colors.primary};
+`;
 export const AddButton = styled.button`
   background-color: #c2fbd7;
   border-radius: 100px;

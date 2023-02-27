@@ -29,7 +29,7 @@ export const Tabledata = styled.td`
 `;
 
 export const Table = styled.table`
-  width: 50%;
+  width: 70%;
   text-align: center;
 `;
 

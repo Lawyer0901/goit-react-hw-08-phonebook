@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout } from 'redux/auth/auth.operation';
 import { getUser } from 'redux/auth/auth.selectors';
+import { LogOutBtn } from './UserNavigation.styled';
+import { UserContainer } from './UserNavigation.styled';
 
 export const UserNavigation = () => {
   const dispatch = useDispatch();
@@ -16,9 +18,9 @@ export const UserNavigation = () => {
     return;
   }
   return (
-    <div>
+    <UserContainer>
       <p>Wellcome, {user}</p>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+      <LogOutBtn onClick={handleLogout}>Logout</LogOutBtn>
+    </UserContainer>
   );
 };
