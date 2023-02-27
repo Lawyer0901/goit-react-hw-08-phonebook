@@ -38,7 +38,7 @@ export const addContact = createAsyncThunk(
       // const state = getToken(getState());
       const { data } = await axios.post('/contacts', newContact);
       // token.set(state);
-      console.log(data);
+      // console.log(data);
       return data;
     } catch (e) {
       return rejectWithValue(e.message);
