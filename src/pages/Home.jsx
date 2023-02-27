@@ -19,7 +19,7 @@ const Home = () => {
         <Box
           sx={{
             minHeight: 'calc(100vh - 60px)',
-            marginTop: '-7px',
+            // marginTop: '-7px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -46,7 +46,7 @@ const Home = () => {
               border: '1px solid #1976d2',
             }}
           >
-            <Typography variant="h6" component="h6">
+            <Typography variant="h6" component="h6" sx={{ marginTop: '4px' }}>
               Register
             </Typography>
           </NavLink>

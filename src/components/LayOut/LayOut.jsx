@@ -7,17 +7,18 @@ import { getIsLogedIn } from 'redux/auth/auth.selectors';
 import { Suspense } from 'react';
 import { HomeNavigation } from 'components/Navigation/HomeNavigation';
 import { Wraper } from 'components/Navigation/UserNavigation.styled';
+import { Header } from './LayOut.styled';
 
 export const LayOut = () => {
   const isLogedIn = useSelector(getIsLogedIn);
   return (
     <>
-      <header>
+      <Header>
         <Wraper>
           <HomeNavigation />
           {isLogedIn ? <UserNavigation /> : <AuthNavigation />}
         </Wraper>
-      </header>
+      </Header>
       <main>
         <Suspense fallback={null}>
           <Outlet />

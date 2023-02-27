@@ -53,7 +53,7 @@ export const LoginForm = () => {
             flexDirection: 'column',
             width: 300,
             height: 300,
-            backgroundColor: 'violet',
+            backgroundColor: 'RGB(28,245,20)',
           }}
         >
           <Title>Phonebook</Title>

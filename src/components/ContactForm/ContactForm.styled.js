@@ -39,7 +39,7 @@ export const Input = styled.input`
   }
 `;
 export const Title = styled.h1`
-  color: #1976d2;
+  color: RGB(251, 82, 0);
   border-color: ${p => p.theme.colors.primary};
 `;
 export const AddButton = styled.button`

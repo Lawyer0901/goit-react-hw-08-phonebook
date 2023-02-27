@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Form, Label, Input, AddButton } from './ContactForm.styled';
+import { Form, Label, Input, AddButton, Title } from './ContactForm.styled';
 
 import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
@@ -50,9 +50,11 @@ export const ContactForm = () => {
         flexDirection: 'column',
         width: 300,
         height: 300,
-        backgroundColor: 'violet',
+        backgroundColor: 'RGB(28,245,20)',
+        textAlign: 'center',
       }}
     >
+      <Title>Enter Name and Phone</Title>
       <Form onSubmit={hendleSubmit}>
         <Label>
           Name
