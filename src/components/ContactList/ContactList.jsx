@@ -13,7 +13,7 @@ export function ContactList() {
   const filter = useSelector(getFilter);
   const dispatch = useDispatch();
   const filteredContacts = contacts.filter(({ name }) =>
-    name.toLowerCase().includes(filter)
+    name.toLowerCase().includes(filter.toLowerCase())
   );
   // const isLoading = useSelector(getIsLoading);
   useEffect(() => {

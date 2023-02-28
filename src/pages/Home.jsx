@@ -1,7 +1,7 @@
 // import { LinkToRegisterPage } from 'components/Link';
 import Typography from '@mui/material/Typography';
 import { NavLink } from 'react-router-dom';
-import { Container } from 'components/Navigation/UserNavigation.styled';
+// import { Container } from 'components/Navigation/UserNavigation.styled';
 import { Text } from 'components/Text';
 
 import { useSelector } from 'react-redux';
@@ -12,7 +12,8 @@ import { LoginForm } from 'components/LoginForm/LoginForm';
 const Home = () => {
   const isLogedIn = useSelector(getIsLogedIn);
   return (
-    <Container>
+    // <Container>
+    <>
       {isLogedIn ? (
         <Text />
       ) : (
@@ -22,7 +23,7 @@ const Home = () => {
             // marginTop: '-7px',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'flexStart',
             flexDirection: 'column',
           }}
         >
@@ -52,7 +53,8 @@ const Home = () => {
           </NavLink>
         </Box>
       )}
-    </Container>
+    </>
+    // </Container>
   );
 };
 
